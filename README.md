@@ -1,3 +1,11 @@
+## 🤝 Contributing
+
+To contribute to UI, make sure to use the [Geist UI](https://geist-ui.dev/) design system.
+
+When contributing to backend-related logic, make sure to sync-up `backend/appwrite.json` by running the `appwrite init` commands in the `backend` folder.
+
+## 🤖 Auto-generated documentation
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

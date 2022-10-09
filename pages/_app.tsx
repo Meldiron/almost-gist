@@ -9,17 +9,41 @@ import {
   Button,
   Link,
 } from "@geist-ui/core";
-import { useState } from "react";
-import { Github } from "@geist-ui/icons";
+import { useEffect, useState } from "react";
+import { Github, Moon, Sun } from "@geist-ui/icons";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [themeType, setThemeType] = useState("dark");
 
-  const switchTheme = () => {
-    setThemeType((lastThemeType) =>
-      lastThemeType === "dark" ? "light" : "dark"
+  useEffect(() => {
+    if (localStorage.getItem("theme") === null) {
+      localStorage.setItem("theme", "dark");
+    }
+
+    setThemeType(localStorage.getItem("theme") ?? "dark");
+  });
+
+  function setTheme(theme: string) {
+    setThemeType(theme);
+    localStorage.setItem("theme", theme);
+  }
+
+  const themeButton =
+    themeType === "dark" ? (
+      <Button
+        onClick={() => setTheme("light")}
+        iconRight={<Sun />}
+        auto
+        px={0.6}
+      />
+    ) : (
+      <Button
+        onClick={() => setTheme("dark")}
+        iconRight={<Moon />}
+        auto
+        px={0.6}
+      />
     );
-  };
 
   return (
     <GeistProvider themeType={themeType}>
@@ -60,6 +84,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     Login with GitHub
                   </Button>
                 </Grid>
+                <Grid>{themeButton}</Grid>
               </Grid.Container>
             </Grid>
           </Grid.Container>
