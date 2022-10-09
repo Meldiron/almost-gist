@@ -1,0 +1,22 @@
+{
+    "projectId": "almostGist",
+    "projectName": "Almost Gist",
+    "settings": {
+        "authLimit": 0,
+        "authEmailPassword": false,
+        "authUsersAuthMagicURL": false,
+        "authAnonymous": false,
+        "authInvites": false,
+        "authJWT": false,
+        "authPhone": false,
+        "serviceStatusForAccount": true,
+        "serviceStatusForAvatars": true,
+        "serviceStatusForDatabases": true,
+        "serviceStatusForLocale": true,
+        "serviceStatusForHealth": true,
+        "serviceStatusForStorage": true,
+        "serviceStatusForTeams": true,
+        "serviceStatusForUsers": true,
+        "serviceStatusForFunctions": true
+    }
+}
