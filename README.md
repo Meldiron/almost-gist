@@ -1,3 +1,17 @@
+![Almost Gist Cover](public/cover.png)
+
+# 🗃️ Almost Gist
+
+> Platform to share your markdowns with anyone.
+
+TODO: Description
+
+## 🧰 Tech Stack
+
+- [Appwrite](https://appwrite.io/)
+- [Next.js](https://nextjs.org/)
+- [Geist UI](https://geist-ui.dev/)
+
 ## 👀 Setup Client
 
 1. Install libarries `npm install`
