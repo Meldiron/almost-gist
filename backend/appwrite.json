@@ -18,5 +18,118 @@
         "serviceStatusForTeams": true,
         "serviceStatusForUsers": true,
         "serviceStatusForFunctions": true
-    }
+    },
+    "teams": [
+        {
+            "$id": "mods",
+            "$createdAt": 1665343187,
+            "$updatedAt": 1665343187,
+            "name": "Moderators",
+            "total": 0
+        }
+    ],
+    "databases": [
+        {
+            "$id": "prod",
+            "name": "Production",
+            "$createdAt": 1665343029,
+            "$updatedAt": 1665343029
+        }
+    ],
+    "collections": [
+        {
+            "$id": "gists",
+            "$createdAt": 1665343037,
+            "$updatedAt": 1665343177,
+            "databaseId": "prod",
+            "name": "Gists",
+            "enabled": true,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "content",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 100000,
+                    "default": null
+                },
+                {
+                    "key": "reactions",
+                    "type": "integer",
+                    "status": "available",
+                    "required": false,
+                    "array": true,
+                    "min": -9223372036854775808,
+                    "max": 9223372036854775807,
+                    "default": null
+                },
+                {
+                    "key": "password",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": [],
+            "permission": "document",
+            "$read": [
+                "role:all"
+            ],
+            "$write": [
+                "role:member",
+                "team:mods"
+            ]
+        },
+        {
+            "$id": "comments",
+            "$createdAt": 1665343149,
+            "$updatedAt": 1665343210,
+            "databaseId": "prod",
+            "name": "Comments",
+            "enabled": true,
+            "attributes": [
+                {
+                    "key": "content",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 100000,
+                    "default": null
+                },
+                {
+                    "key": "reactions",
+                    "type": "integer",
+                    "status": "available",
+                    "required": false,
+                    "array": true,
+                    "min": -9223372036854775808,
+                    "max": 9223372036854775807,
+                    "default": null
+                }
+            ],
+            "indexes": [],
+            "permission": "document",
+            "$read": [
+                "role:all"
+            ],
+            "$write": [
+                "role:member",
+                "team:mods"
+            ]
+        }
+    ]
 }

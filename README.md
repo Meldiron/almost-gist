@@ -1,3 +1,32 @@
+## 👀 Setup Client
+
+1. Install libarries `npm install`
+2. Update `endpoint` in `services/appwrite.ts`
+3. Start server `npm serve`
+
+## ⚙️ Setup Server
+
+1. Setup Appwrite server
+2. Create project `almostGist`
+3. Install Appwrite CLI
+4. Login with `appwrite login`
+5. Enter `cd backend`
+6. Deploy database structure with `appwrite deploy collection`
+7. Deploy database seeds with `sh seed.sh`
+8. Deploy project settings with `appwrite deploy settings`
+9. Deploy teams with `appwrite deploy teams`
+10. Deploy functions with `appwrite deploy functions`
+
+## 🚨 Setup Moderation
+
+1. Tell your moderator to create an account (sign in with GitHub)
+2. Add user to Moderators team. They will be able to edit and delete all gists
+
+## 🚀 Deploy client
+
+1. Build with `npm build`
+2. TODO: Write
+
 ## 🤝 Contributing
 
 To contribute to UI, make sure to use the [Geist UI](https://geist-ui.dev/) design system.

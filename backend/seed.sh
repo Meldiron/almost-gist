@@ -1,0 +1,1 @@
+appwrite databases createDocument --databaseId prod --collectionId gists --documentId 'homepage' --data '{"name": "README.md","content":"# Welcome 👋\n\nSign in with GitHub to start creating new gists."}'

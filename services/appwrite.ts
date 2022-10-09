@@ -1,7 +1,9 @@
 import { Client, Account, ID } from 'appwrite';
 
+const endpoint = 'https://demo.appwrite.io/v1';
+
 const client = new Client()
-    .setEndpoint('https://demo.appwrite.io/v1')
+    .setEndpoint(endpoint)
     .setProject('almostGist');
 
 const account = new Account(client);
