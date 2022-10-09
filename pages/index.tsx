@@ -1,12 +1,32 @@
 import type { NextPage } from "next";
-import { Divider, Card, Code, Grid, Button, Text, Link } from "@geist-ui/core";
+import {
+  Divider,
+  Card,
+  Code,
+  Grid,
+  Button,
+  Text,
+  Link,
+  Textarea,
+} from "@geist-ui/core";
 import { marked } from "marked";
+import { useState } from "react";
 
 marked.use({
   sanitize: true,
 });
 
 const Home: NextPage = () => {
+  const [value, setValue] = useState();
+
+  const handler = (e: any) => {
+    setValue(e.target.value);
+  };
+
+  function handleSubmit(e: any) {
+    e.preventDefault();
+  }
+
   const markdown = `# Welcome 👋
 Hope you are doing well! This is example
 
@@ -84,7 +104,7 @@ console.log("Works!");
       </Grid>
 
       <Grid xs={24}>
-        <div style={{ width: "100%", padding: "2rem 0" }}>
+        <div style={{ width: "100%", padding: "1rem 0" }}>
           <Divider>3 Comments</Divider>
         </div>
       </Grid>
@@ -229,9 +249,35 @@ console.log("Works!");
           </Card.Footer>
         </Card>
       </Grid>
-
       <Grid xs={24}>
-        <Text>TODO: Commenting input</Text>
+        <Card width="100%">
+          <form onSubmit={handleSubmit}>
+            <Grid.Container gap={1}>
+              <Grid xs={24}>
+                <Text h4 my={0}>
+                  Write a Comment!
+                </Text>
+              </Grid>
+
+              <Grid xs={24}>
+                <Textarea
+                  required={true}
+                  width="100%"
+                  rows={4}
+                  value={value}
+                  onChange={handler}
+                  placeholder="Leave a comment on this page."
+                />
+              </Grid>
+
+              <Grid xs={24}>
+                <Button htmlType="submit" type="success">
+                  Submit
+                </Button>
+              </Grid>
+            </Grid.Container>
+          </form>
+        </Card>
       </Grid>
     </Grid.Container>
   );
