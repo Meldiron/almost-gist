@@ -1,6 +1,6 @@
 import { Client, Account, ID } from 'appwrite';
 
-const endpoint = 'https://demo.appwrite.io/v1';
+const endpoint = 'https://appwrite.almost-gist.matejbaco.eu/v1';
 
 const client = new Client()
     .setEndpoint(endpoint)
