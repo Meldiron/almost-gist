@@ -68,7 +68,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </Link>{" "}
                 by{" "}
                 <Link href="https://github.com/meldiron" block>
-                  Matej "Meldiron" Bačo
+                  Matej &quot;Meldiron&quot; Bačo
                 </Link>
                 .
               </Grid>

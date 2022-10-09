@@ -39,7 +39,7 @@ TODO: Description
 ## 🚀 Deploy client
 
 1. Build with `npm build`
-2. TODO: Write
+2. Deploy from `.next`, or set up static build
 
 ## 🤝 Contributing
 
