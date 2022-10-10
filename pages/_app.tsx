@@ -57,12 +57,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Page.Header center>
             <PageHeader />
           </Page.Header>
-          <Page.Content>
+          <Page.Content paddingBottom={0}>
             <Component {...pageProps} />
           </Page.Content>
-          <Page.Footer>
+          <Page.Content paddingTop={0}>
             <PageFooter />
-          </Page.Footer>
+          </Page.Content>
         </Page>
       </AccountProvider>
     </ThemeProvider>

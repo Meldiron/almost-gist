@@ -18,10 +18,6 @@ import { AppwriteService, Comment, Gist } from "../../services/appwrite";
 import { Models } from "appwrite";
 import AccountContext from "../../contexts/account";
 
-marked.use({
-  sanitize: true,
-});
-
 export const GistDetail: FC<{
   gist: Gist;
   comments: Models.DocumentList<Comment>;

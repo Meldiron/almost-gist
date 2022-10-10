@@ -14,8 +14,6 @@ TODO:
 
 > Platform to share your markdowns with anyone.
 
-TODO: Description
-
 ## 🧰 Tech Stack
 
 - [Appwrite](https://appwrite.io/)
@@ -49,7 +47,7 @@ TODO: Description
 ## 🚀 Deploy client
 
 1. Build with `npm build`
-2. Deploy from `.next`, or set up static build
+2. Deploy from `.next`, or set up a static build
 
 ## 🤝 Contributing
 
