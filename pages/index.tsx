@@ -30,19 +30,16 @@ const Home: NextPage<{
   gist: Gist | null;
   comments: Models.DocumentList<Comment> | null;
 }> = ({ gist, comments }) => {
-  if (gist === null || comments === null) {
-    return <Note type="warning">Gist could not be loaded.</Note>;
-  }
-
   const [realtimeGist, setRealtimeGist] = useState(gist);
   const [realtimeComments, setRealtimeComments] = useState(comments);
 
-  const subscriptions = [];
+  const subscriptions: (() => void)[] = [];
 
   useEffect(() => {
     subscriptions.push(
       AppwriteClient.subscribe<Gist>(
-        "databases.prod.collections.gists.documents." + gist.$id,
+        "databases.prod.collections.gists.documents." + realtimeGist?.$id ??
+          "unknown",
         (payload) => {
           setRealtimeGist(payload.payload);
         }
@@ -55,13 +52,26 @@ const Home: NextPage<{
         (payload) => {
           setRealtimeComments({
             ...realtimeComments,
-            total: realtimeComments.total + 1,
-            documents: [payload.payload, ...realtimeComments.documents],
+            total: (realtimeComments?.total ?? 0) + 1,
+            documents: [
+              payload.payload,
+              ...(realtimeComments?.documents ?? []),
+            ],
           });
         }
       )
     );
+
+    return () => {
+      for (const unsub of subscriptions) {
+        unsub();
+      }
+    };
   });
+
+  if (realtimeGist === null || realtimeComments === null) {
+    return <Note type="warning">Gist could not be loaded.</Note>;
+  }
 
   return <GistDetail gist={realtimeGist} comments={realtimeComments} />;
 };
