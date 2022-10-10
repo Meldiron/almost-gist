@@ -5,6 +5,7 @@ import {
   Divider,
   Grid,
   Note,
+  Tabs,
   Text,
   Textarea,
 } from "@geist-ui/core";
@@ -25,11 +26,11 @@ export const GistDetail: FC<{
   gist: Gist;
   comments: Models.DocumentList<Comment>;
 }> = ({ gist, comments }) => {
-  const [value, setValue] = useState();
+  const [commentValue, setCommentValue] = useState("");
   const [account, _setAccount] = useContext(AccountContext);
 
-  const handler = (e: any) => {
-    setValue(e.target.value);
+  const onCommentValueChange = (e: any) => {
+    setCommentValue(e.target.value);
   };
 
   function handleSubmit(e: any) {
@@ -41,7 +42,7 @@ export const GistDetail: FC<{
       <Grid xs={24}>
         <Card width="100%">
           <form onSubmit={handleSubmit}>
-            <Grid.Container gap={1}>
+            <Grid.Container gap={2}>
               <Grid xs={24}>
                 <Text h4 my={0}>
                   Write a Comment!
@@ -49,14 +50,21 @@ export const GistDetail: FC<{
               </Grid>
 
               <Grid xs={24}>
-                <Textarea
-                  required={true}
-                  width="100%"
-                  rows={4}
-                  value={value}
-                  onChange={handler}
-                  placeholder="Leave a comment on this page."
-                />
+                <Tabs hideDivider initialValue="1" width={"100%"}>
+                  <Tabs.Item label="Edit" value="1">
+                    <Textarea
+                      required={true}
+                      width="100%"
+                      rows={4}
+                      value={commentValue}
+                      onChange={onCommentValueChange}
+                      placeholder="Leave a comment on this page."
+                    />
+                  </Tabs.Item>
+                  <Tabs.Item label="Preview" value="2">
+                    {parse(marked.parse(commentValue))}
+                  </Tabs.Item>
+                </Tabs>
               </Grid>
 
               <Grid xs={24}>
@@ -105,7 +113,7 @@ export const GistDetail: FC<{
 
       {comments.documents.map((comment) => {
         return (
-          <Grid xs={24}>
+          <Grid key={comment.$id} xs={24}>
             <Card width="100%">
               <div>{parse(marked.parse(comment.content))}</div>
               <Card.Footer>
