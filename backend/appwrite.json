@@ -33,14 +33,14 @@
             "$id": "prod",
             "name": "Production",
             "$createdAt": 1665343029,
-            "$updatedAt": 1665343029
+            "$updatedAt": 1665409062
         }
     ],
     "collections": [
         {
             "$id": "gists",
             "$createdAt": 1665343037,
-            "$updatedAt": 1665343177,
+            "$updatedAt": 1665409062,
             "databaseId": "prod",
             "name": "Gists",
             "enabled": true,
@@ -72,15 +72,6 @@
                     "min": -9223372036854775808,
                     "max": 9223372036854775807,
                     "default": null
-                },
-                {
-                    "key": "password",
-                    "type": "string",
-                    "status": "available",
-                    "required": false,
-                    "array": false,
-                    "size": 255,
-                    "default": null
                 }
             ],
             "indexes": [],
@@ -96,7 +87,7 @@
         {
             "$id": "comments",
             "$createdAt": 1665343149,
-            "$updatedAt": 1665343210,
+            "$updatedAt": 1665409062,
             "databaseId": "prod",
             "name": "Comments",
             "enabled": true,
@@ -119,9 +110,30 @@
                     "min": -9223372036854775808,
                     "max": 9223372036854775807,
                     "default": null
+                },
+                {
+                    "key": "gistId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
                 }
             ],
-            "indexes": [],
+            "indexes": [
+                {
+                    "key": "gistPage",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "gistId"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ],
             "permission": "document",
             "$read": [
                 "role:all"

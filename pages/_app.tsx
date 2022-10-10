@@ -4,6 +4,7 @@ import { AccountProvider } from "../contexts/account";
 import { PageHeader } from "../components/Page/Header";
 import { ThemeProvider } from "../contexts/theme";
 import Head from "next/head";
+import { PageFooter } from "../components/Page/Footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -60,19 +61,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </Page.Content>
           <Page.Footer>
-            <Grid.Container justify="center">
-              <Grid>
-                Made with 💙 and{" "}
-                <Link href="https://appwrite.io/" block>
-                  Appwrite
-                </Link>{" "}
-                by{" "}
-                <Link href="https://github.com/meldiron" block>
-                  Matej &quot;Meldiron&quot; Bačo
-                </Link>
-                .
-              </Grid>
-            </Grid.Container>
+            <PageFooter />
           </Page.Footer>
         </Page>
       </AccountProvider>
