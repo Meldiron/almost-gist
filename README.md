@@ -7,6 +7,7 @@ TODO:
 - Rute guard logic
 - Remove all `any`
 - All `TODO: `
+- Comments pagination and "Load more" or something
 
 ![Almost Gist Cover](public/cover.png)
 

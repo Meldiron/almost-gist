@@ -23,7 +23,11 @@ export const PageFooter: FC = () => {
       <Grid xs={24}>
         <Grid.Container justify="center">
           <Grid>
-            <a href="https://github.com/Meldiron/almost-gist" target="_blank">
+            <a
+              href="https://github.com/Meldiron/almost-gist"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Button type="secondary" icon={<Star />} auto>
                 Star on GitHub
               </Button>
