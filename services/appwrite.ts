@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Models, Query } from 'appwrite';
+import { Client, Account, Databases, Models, Query, ID } from 'appwrite';
 
 export type Gist = {
     name: string;
@@ -14,12 +14,17 @@ export type Comment = {
 
 const endpoint = 'https://appwrite.almost-gist.matejbaco.eu/v1';
 
-const client = new Client()
+export const AppwriteClient = new Client()
     .setEndpoint(endpoint)
     .setProject('almostGist');
 
-const account = new Account(client);
-const database = new Databases(client);
+const account = new Account(AppwriteClient);
+const database = new Databases(AppwriteClient);
+
+const showError = (err: any) => {
+    console.error(err);
+    // TODO: Open toast
+}
 
 export const AppwriteService = {
     signIn: () => {
@@ -30,7 +35,6 @@ export const AppwriteService = {
         try {
             return await account.get();
         } catch (err) {
-            console.error(err);
             return null;
         }
     },
@@ -38,7 +42,7 @@ export const AppwriteService = {
         try {
             return await account.deleteSession('current');
         } catch (err) {
-            console.error(err);
+            showError(err);
             return null;
         }
     },
@@ -46,17 +50,29 @@ export const AppwriteService = {
         try {
             return await database.getDocument<Gist>("prod", "gists", gistId);
         } catch (err) {
-            console.error(err);
+            showError(err);
             return null;
         }
     },
     getComments: async (gistId: string) => {
         try {
             return await database.listDocuments<Comment>("prod", "comments", [
-                Query.equal("gistId", gistId)
+                Query.equal("gistId", gistId),
+                Query.orderDesc("$createdAt")
             ]);
         } catch (err) {
-            console.error(err);
+            showError(err);
+            return null;
+        }
+    },
+    createComment: async (gistId: string, content: string) => {
+        try {
+            return await database.createDocument<Comment>("prod", "comments", ID.unique(), {
+                gistId,
+                content
+            });
+        } catch (err) {
+            showError(err);
             return null;
         }
     }

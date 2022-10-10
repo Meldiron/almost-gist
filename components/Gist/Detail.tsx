@@ -14,7 +14,7 @@ import parse from "html-react-parser";
 import { FC, useContext, useState } from "react";
 import { GistReactions } from "./Reactions";
 import { marked } from "marked";
-import { Comment, Gist } from "../../services/appwrite";
+import { AppwriteService, Comment, Gist } from "../../services/appwrite";
 import { Models } from "appwrite";
 import AccountContext from "../../contexts/account";
 
@@ -27,6 +27,7 @@ export const GistDetail: FC<{
   comments: Models.DocumentList<Comment>;
 }> = ({ gist, comments }) => {
   const [commentValue, setCommentValue] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [account, _setAccount] = useContext(AccountContext);
 
   const onCommentValueChange = (e: any) => {
@@ -35,6 +36,18 @@ export const GistDetail: FC<{
 
   function handleSubmit(e: any) {
     e.preventDefault();
+
+    async function onSubmit() {
+      setIsSubmitting(true);
+      const res = await AppwriteService.createComment(gist.$id, commentValue);
+      setIsSubmitting(false);
+
+      if (res) {
+        setCommentValue("");
+      }
+    }
+
+    onSubmit();
   }
 
   const commentForm =
@@ -68,7 +81,7 @@ export const GistDetail: FC<{
               </Grid>
 
               <Grid xs={24}>
-                <Button htmlType="submit" type="success">
+                <Button loading={isSubmitting} htmlType="submit" type="success">
                   Submit
                 </Button>
               </Grid>
