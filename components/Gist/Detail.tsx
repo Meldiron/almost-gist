@@ -99,7 +99,11 @@ export const GistDetail: FC<{
     <Grid.Container gap={2} style={{ marginBottom: "1rem" }}>
       <Grid xs={24}>
         <Card width="100%">
-          <GistReactions reactions={gist.reactions ?? []} />
+          <GistReactions
+            resourceId={gist.$id}
+            resourceType="gists"
+            reactions={gist.reactions ?? []}
+          />
         </Card>
       </Grid>
       <Grid xs={24}>
@@ -126,7 +130,11 @@ export const GistDetail: FC<{
             <Card width="100%">
               <div>{parse(marked.parse(comment.content))}</div>
               <Card.Footer>
-                <GistReactions reactions={gist.reactions ?? []} />
+                <GistReactions
+                  resourceId={comment.$id}
+                  resourceType="comments"
+                  reactions={comment.reactions ?? []}
+                />
               </Card.Footer>
             </Card>
           </Grid>

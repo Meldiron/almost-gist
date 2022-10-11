@@ -142,6 +142,111 @@
                 "role:member",
                 "team:mods"
             ]
+        },
+        {
+            "$id": "reactions",
+            "$createdAt": 1665462953,
+            "$updatedAt": 1665462988,
+            "databaseId": "prod",
+            "name": "Reactions",
+            "enabled": true,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "reactionIndex",
+                    "type": "integer",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "min": -9223372036854775808,
+                    "max": 9223372036854775807,
+                    "default": null
+                },
+                {
+                    "key": "resourceId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "resourceType",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "findReaction",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "userId",
+                        "resourceId",
+                        "resourceType",
+                        "reactionIndex"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC",
+                        "ASC",
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "aggregateReactions",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "resourceId",
+                        "resourceType",
+                        "reactionIndex"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC",
+                        "ASC"
+                    ]
+                }
+            ],
+            "permission": "collection",
+            "$read": [
+                "role:member"
+            ],
+            "$write": []
+        }
+    ],
+    "functions": [
+        {
+            "$id": "toggleReaction",
+            "name": "toggleReaction",
+            "runtime": "node-16.0",
+            "path": "functions/toggleReaction",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [
+                "users"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
         }
     ]
 }

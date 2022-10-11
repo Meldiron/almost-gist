@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Models, Query, ID } from 'appwrite';
+import { Client, Account, Databases, Models, Query, ID, Functions } from 'appwrite';
 
 export type Gist = {
     name: string;
@@ -20,6 +20,7 @@ export const AppwriteClient = new Client()
 
 const account = new Account(AppwriteClient);
 const database = new Databases(AppwriteClient);
+const functions = new Functions(AppwriteClient);
 
 const showError = (err: any) => {
     console.error(err);
@@ -71,6 +72,31 @@ export const AppwriteService = {
                 gistId,
                 content
             });
+        } catch (err) {
+            showError(err);
+            return null;
+        }
+    },
+    toggleReaction: async (resourceType: 'gists' | 'comments', resourceId: string, reactionIndex: number) => {
+        try {
+            const execution = await functions.createExecution("toggleReaction", JSON.stringify({
+                resourceType,
+                resourceId,
+                reactionIndex
+            }));
+
+            if (execution.response) {
+                const response = JSON.parse(execution.response);
+
+                if (!response.success) {
+                    throw new Error(response.message);
+                }
+
+                return response;
+            } else {
+                console.log(execution);
+                throw new Error("Could not execute function.");
+            }
         } catch (err) {
             showError(err);
             return null;

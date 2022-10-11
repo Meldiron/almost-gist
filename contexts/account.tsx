@@ -13,7 +13,7 @@ export const AccountProvider = ({ children }: any) => {
     }
 
     updateAccount();
-  });
+  }, []);
 
   return (
     <AccountContext.Provider value={[account, setAccount]}>

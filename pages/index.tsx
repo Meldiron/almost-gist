@@ -50,6 +50,7 @@ const Home: NextPage<{
       AppwriteClient.subscribe<Comment>(
         "databases.prod.collections.comments.documents",
         (payload) => {
+          // TODO: Differenciate between add/update/delete
           setRealtimeComments({
             ...realtimeComments,
             total: (realtimeComments?.total ?? 0) + 1,
