@@ -22,10 +22,8 @@ export const GistComments: FC<{
 
   const queryClient = useQueryClient();
 
-  let commentSub = () => {};
   useEffect(() => {
-    commentSub();
-    commentSub = AppwriteClient.subscribe<Comment>(
+    AppwriteClient.subscribe<Comment>(
       "databases.prod.collections.comments.documents",
       (payload) => {
         if (payload.payload.gistId === gistId) {
@@ -33,7 +31,7 @@ export const GistComments: FC<{
         }
       }
     );
-  }, [comments]);
+  }, []);
 
   if (comments.isLoading) {
     return <Loading>Loading comments</Loading>;

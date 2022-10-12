@@ -35,10 +35,8 @@ export const GistReactions: FC<{
 
   const queryClient = useQueryClient();
 
-  let reactionsSub = () => {};
   useEffect(() => {
-    reactionsSub();
-    reactionsSub = AppwriteClient.subscribe<Reaction>(
+    AppwriteClient.subscribe<Reaction>(
       "databases.prod.collections.reactions.documents",
       (payload) => {
         if (
@@ -51,7 +49,7 @@ export const GistReactions: FC<{
         }
       }
     );
-  }, [myReactions]);
+  }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
