@@ -1,16 +1,22 @@
 import { Button, Grid, Loading, Note } from "@geist-ui/core";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Models } from "appwrite";
-import { FC, useState } from "react";
-import { AppwriteService, Reaction } from "../../services/appwrite";
+import { FC, useEffect, useState } from "react";
+import {
+  AppwriteClient,
+  AppwriteService,
+  Reaction,
+} from "../../services/appwrite";
 
 export const GistReactions: FC<{
   resourceType: "gists" | "comments";
   resourceId: string;
   reactions: number[];
 }> = ({ reactions, resourceType, resourceId }) => {
-  const account = useQuery<Models.Account<any> | null>(["account"]);
-
+  const account = useQuery<Models.Account<any> | null>(
+    ["account"],
+    async () => await AppwriteService.getAccount()
+  );
   const myReactions = useQuery(
     [
       `myReactions_${resourceType}_${resourceId}`,
@@ -26,6 +32,26 @@ export const GistReactions: FC<{
       );
     }
   );
+
+  const queryClient = useQueryClient();
+
+  let reactionsSub = () => {};
+  useEffect(() => {
+    reactionsSub();
+    reactionsSub = AppwriteClient.subscribe<Reaction>(
+      "databases.prod.collections.reactions.documents",
+      (payload) => {
+        if (
+          payload.payload.resourceId === resourceId &&
+          payload.payload.resourceType === resourceType
+        ) {
+          queryClient.invalidateQueries([
+            `myReactions_${resourceType}_${resourceId}`,
+          ]);
+        }
+      }
+    );
+  }, [myReactions]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -69,7 +95,8 @@ export const GistReactions: FC<{
             <Button
               type={doc ? "secondary" : "default"}
               ghost={doc ? true : false}
-              onClick={() => onReactionClick(i)}
+              onClick={(e) => onReactionClick(i)}
+              onMouseDown={(e) => e.preventDefault()}
               loading={isSubmitting}
               icon={<p>{icon}</p>}
               auto

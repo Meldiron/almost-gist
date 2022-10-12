@@ -29,11 +29,6 @@ const account = new Account(AppwriteClient);
 const database = new Databases(AppwriteClient);
 const functions = new Functions(AppwriteClient);
 
-const showError = (err: any) => {
-    console.error(err);
-    // TODO: Open toast
-}
-
 export const AppwriteService = {
     signIn: () => {
         const redirectUrl = window.location.href;
@@ -50,7 +45,7 @@ export const AppwriteService = {
         try {
             return await account.deleteSession('current');
         } catch (err) {
-            showError(err);
+            console.log(err);
             return null;
         }
     },
@@ -58,7 +53,7 @@ export const AppwriteService = {
         try {
             return await database.getDocument<Gist>("prod", "gists", gistId);
         } catch (err) {
-            showError(err);
+            console.log(err);
             return null;
         }
     },
@@ -69,7 +64,7 @@ export const AppwriteService = {
                 Query.orderDesc("$createdAt")
             ]);
         } catch (err) {
-            showError(err);
+            console.log(err);
             return null;
         }
     },
@@ -91,7 +86,7 @@ export const AppwriteService = {
                 content
             });
         } catch (err) {
-            showError(err);
+            console.log(err);
             return null;
         }
     },
@@ -116,7 +111,7 @@ export const AppwriteService = {
                 throw new Error("Could not execute function.");
             }
         } catch (err) {
-            showError(err);
+            console.log(err);
             return null;
         }
     }

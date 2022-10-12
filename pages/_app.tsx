@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { Page, Grid, Link, useToasts } from "@geist-ui/core";
+import { Page } from "@geist-ui/core";
 import { PageHeader } from "../components/Page/Header";
 import { ThemeProvider } from "../contexts/theme";
 import Head from "next/head";

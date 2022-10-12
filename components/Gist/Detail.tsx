@@ -12,17 +12,10 @@ import {
 } from "@geist-ui/core";
 import parse from "html-react-parser";
 
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { GistReactions } from "./Reactions";
 import { marked } from "marked";
-import {
-  AppwriteClient,
-  AppwriteService,
-  Comment,
-  Gist,
-  Reaction,
-} from "../../services/appwrite";
-import { Models } from "appwrite";
+import { AppwriteClient, AppwriteService, Gist } from "../../services/appwrite";
 import { GistComments } from "./Comments";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -30,11 +23,6 @@ export const GistDetail: FC<{
   gistId: string;
 }> = ({ gistId }) => {
   const queryClient = useQueryClient();
-
-  const account = useQuery<Models.Account<any> | null>(
-    ["account"],
-    async () => await AppwriteService.getAccount()
-  );
 
   const gist = useQuery(
     ["gist"],
@@ -47,8 +35,10 @@ export const GistDetail: FC<{
     gistSub = AppwriteClient.subscribe<Gist>(
       "databases.prod.collections.gists.documents." + gist.data?.$id ??
         "unknown",
-      (_payload) => {
-        queryClient.invalidateQueries(["gist"]);
+      (payload) => {
+        if (payload.payload.$id === gistId) {
+          queryClient.invalidateQueries(["gist"]);
+        }
       }
     );
   }, [gist]);

@@ -1,4 +1,4 @@
-const { Databases, Client, Query, ID } = require("node-appwrite");
+const { Databases, Client, Query, ID, Permission, Role } = require("node-appwrite");
 
 /*
   'req' variable has:
@@ -95,7 +95,9 @@ module.exports = async function (req, res) {
       resourceId,
       resourceType,
       reactionIndex
-    })
+    }, [
+      Permission.read(Role.user(userId)),
+    ])
   }
 
   console.log("Updating " + resourceType + " attribute");

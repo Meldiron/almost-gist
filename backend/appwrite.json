@@ -144,14 +144,16 @@
         {
             "$id": "reactions",
             "$createdAt": "2022-10-11T04:35:53.592+00:00",
-            "$updatedAt": "2022-10-11T04:36:28.759+00:00",
+            "$updatedAt": "2022-10-12T19:05:33.763+00:00",
             "$permissions": [
-                "read(\"users\")"
+                "read(\"team:mods\")",
+                "update(\"team:mods\")",
+                "delete(\"team:mods\")"
             ],
             "databaseId": "prod",
             "name": "Reactions",
             "enabled": true,
-            "documentSecurity": false,
+            "documentSecurity": true,
             "attributes": [
                 {
                     "key": "userId",

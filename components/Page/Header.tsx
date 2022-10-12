@@ -7,7 +7,11 @@ import ThemeContext from "../../contexts/theme";
 import { AppwriteService } from "../../services/appwrite";
 
 export const PageHeader: FC = () => {
-  const account = useQuery<Models.Account<any> | null>(["account"]);
+  const account = useQuery<Models.Account<any> | null>(
+    ["account"],
+    async () => await AppwriteService.getAccount()
+  );
+
   const [theme, setTheme] = useContext(ThemeContext);
 
   const queryClient = useQueryClient();
@@ -33,7 +37,7 @@ export const PageHeader: FC = () => {
   );
 
   const authButton =
-    account === null ? (
+    account.data === null ? (
       <Button
         loading={false}
         onClick={() => {
@@ -49,6 +53,7 @@ export const PageHeader: FC = () => {
       <Button
         loading={account.isLoading}
         onClick={async () => {
+          await AppwriteService.signOut();
           queryClient.invalidateQueries(["account"]);
         }}
         auto
