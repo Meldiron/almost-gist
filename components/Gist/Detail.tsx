@@ -29,6 +29,7 @@ export const GistDetail: FC<{
     async () => await AppwriteService.getGist(gistId)
   );
 
+  // TODO: Unsub if needed?
   useEffect(() => {
     AppwriteClient.subscribe<Gist>(
       "databases.prod.collections.gists.documents." + gist.data?.$id ??
@@ -39,7 +40,7 @@ export const GistDetail: FC<{
         }
       }
     );
-  }, []);
+  }, [gist]);
 
   if (gist.isLoading) {
     return <Loading>Loading gist</Loading>;
