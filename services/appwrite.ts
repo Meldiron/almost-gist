@@ -12,6 +12,13 @@ export type Comment = {
     reactions?: number[];
 } & Models.Document;
 
+export type Reaction = {
+    userId: string;
+    reactionIndex: number;
+    resourceId: string;
+    resourceType: 'comments' | 'gists';
+} & Models.Document;
+
 const endpoint = 'https://appwrite.almost-gist.matejbaco.eu/v1';
 
 export const AppwriteClient = new Client()
@@ -60,6 +67,18 @@ export const AppwriteService = {
             return await database.listDocuments<Comment>("prod", "comments", [
                 Query.equal("gistId", gistId),
                 Query.orderDesc("$createdAt")
+            ]);
+        } catch (err) {
+            showError(err);
+            return null;
+        }
+    },
+    getMyReactions: async (resourceType: 'gists' | 'comments', resourceId: string, userId: string) => {
+        try {
+            return await database.listDocuments<Reaction>("prod", "reactions", [
+                Query.equal("resourceType", resourceType),
+                Query.equal("resourceId", resourceId),
+                Query.equal("userId", userId)
             ]);
         } catch (err) {
             showError(err);

@@ -21,7 +21,8 @@ import AccountContext from "../../contexts/account";
 export const GistDetail: FC<{
   gist: Gist;
   comments: Models.DocumentList<Comment>;
-}> = ({ gist, comments }) => {
+  myReactions: boolean[];
+}> = ({ gist, comments, myReactions }) => {
   const [commentValue, setCommentValue] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [account, _setAccount] = useContext(AccountContext);
@@ -99,15 +100,6 @@ export const GistDetail: FC<{
     <Grid.Container gap={2} style={{ marginBottom: "1rem" }}>
       <Grid xs={24}>
         <Card width="100%">
-          <GistReactions
-            resourceId={gist.$id}
-            resourceType="gists"
-            reactions={gist.reactions ?? []}
-          />
-        </Card>
-      </Grid>
-      <Grid xs={24}>
-        <Card width="100%">
           <Card.Content>
             <Code>{gist.name}</Code>
           </Card.Content>
@@ -117,9 +109,21 @@ export const GistDetail: FC<{
       </Grid>
 
       <Grid xs={24}>
+        <Card width="100%">
+          <GistReactions
+            myReactions={myReactions}
+            resourceId={gist.$id}
+            resourceType="gists"
+            reactions={gist.reactions ?? []}
+          />
+        </Card>
+      </Grid>
+
+      <Grid xs={24}>
         <div style={{ width: "100%", padding: "1rem 0" }}>
           <Divider>
-            {comments.total} {comments.total === 1 ? "Comment" : "Comments"}
+            {comments.total >= 5000 ? "5000+" : comments.total}{" "}
+            {comments.total === 1 ? "Comment" : "Comments"}
           </Divider>
         </div>
       </Grid>
@@ -130,7 +134,9 @@ export const GistDetail: FC<{
             <Card width="100%">
               <div>{parse(marked.parse(comment.content))}</div>
               <Card.Footer>
+                {/* TODO: Load all comments reactions */}
                 <GistReactions
+                  myReactions={[]}
                   resourceId={comment.$id}
                   resourceType="comments"
                   reactions={comment.reactions ?? []}

@@ -32,18 +32,25 @@
         {
             "$id": "prod",
             "name": "Production",
-            "$createdAt": 1665343029,
-            "$updatedAt": 1665409062
+            "$createdAt": "2022-10-09T19:17:09.295+00:00",
+            "$updatedAt": "2022-10-10T13:37:42.492+00:00"
         }
     ],
     "collections": [
         {
             "$id": "gists",
-            "$createdAt": 1665343037,
-            "$updatedAt": 1665409062,
+            "$createdAt": "2022-10-09T19:17:17.352+00:00",
+            "$updatedAt": "2022-10-10T13:37:42.522+00:00",
+            "$permissions": [
+                "create(\"users\")",
+                "delete(\"team:mods\")",
+                "read(\"any\")",
+                "update(\"team:mods\")"
+            ],
             "databaseId": "prod",
             "name": "Gists",
             "enabled": true,
+            "documentSecurity": true,
             "attributes": [
                 {
                     "key": "name",
@@ -74,23 +81,22 @@
                     "default": null
                 }
             ],
-            "indexes": [],
-            "permission": "document",
-            "$read": [
-                "role:all"
-            ],
-            "$write": [
-                "role:member",
-                "team:mods"
-            ]
+            "indexes": []
         },
         {
             "$id": "comments",
-            "$createdAt": 1665343149,
-            "$updatedAt": 1665409062,
+            "$createdAt": "2022-10-09T19:19:09.856+00:00",
+            "$updatedAt": "2022-10-10T13:37:42.548+00:00",
+            "$permissions": [
+                "create(\"users\")",
+                "delete(\"team:mods\")",
+                "read(\"any\")",
+                "update(\"team:mods\")"
+            ],
             "databaseId": "prod",
             "name": "Comments",
             "enabled": true,
+            "documentSecurity": true,
             "attributes": [
                 {
                     "key": "content",
@@ -133,23 +139,19 @@
                         "ASC"
                     ]
                 }
-            ],
-            "permission": "document",
-            "$read": [
-                "role:all"
-            ],
-            "$write": [
-                "role:member",
-                "team:mods"
             ]
         },
         {
             "$id": "reactions",
-            "$createdAt": 1665462953,
-            "$updatedAt": 1665462988,
+            "$createdAt": "2022-10-11T04:35:53.592+00:00",
+            "$updatedAt": "2022-10-11T04:36:28.759+00:00",
+            "$permissions": [
+                "read(\"users\")"
+            ],
             "databaseId": "prod",
             "name": "Reactions",
             "enabled": true,
+            "documentSecurity": false,
             "attributes": [
                 {
                     "key": "userId",
@@ -221,13 +223,23 @@
                         "ASC",
                         "ASC"
                     ]
+                },
+                {
+                    "key": "myReactions",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "resourceId",
+                        "resourceType",
+                        "userId"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC",
+                        "ASC"
+                    ]
                 }
-            ],
-            "permission": "collection",
-            "$read": [
-                "role:member"
-            ],
-            "$write": []
+            ]
         }
     ],
     "functions": [
