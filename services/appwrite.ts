@@ -41,7 +41,7 @@ export const AppwriteService = {
     },
     getAccount: async () => {
         try {
-            return await account.get();
+            return await account.get<any>();
         } catch (err) {
             return null;
         }
@@ -81,7 +81,6 @@ export const AppwriteService = {
                 Query.equal("userId", userId)
             ]);
         } catch (err) {
-            showError(err);
             return null;
         }
     },

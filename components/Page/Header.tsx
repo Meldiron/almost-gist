@@ -1,14 +1,16 @@
 import { Grid, Text, Image, Button } from "@geist-ui/core";
 import { Github, Moon, Sun } from "@geist-ui/icons";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Models } from "appwrite";
 import { FC, useContext, useState } from "react";
-import AccountContext from "../../contexts/account";
 import ThemeContext from "../../contexts/theme";
 import { AppwriteService } from "../../services/appwrite";
 
 export const PageHeader: FC = () => {
-  const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const account = useQuery<Models.Account<any> | null>(["account"]);
   const [theme, setTheme] = useContext(ThemeContext);
-  const [account, setAccount] = useContext(AccountContext);
+
+  const queryClient = useQueryClient();
 
   const themeButton = theme ? (
     <Button
@@ -33,9 +35,8 @@ export const PageHeader: FC = () => {
   const authButton =
     account === null ? (
       <Button
-        loading={isLoginLoading}
+        loading={false}
         onClick={() => {
-          setIsLoginLoading(true);
           AppwriteService.signIn();
         }}
         icon={<Github />}
@@ -46,13 +47,9 @@ export const PageHeader: FC = () => {
       </Button>
     ) : (
       <Button
-        loading={isLoginLoading}
+        loading={account.isLoading}
         onClick={async () => {
-          setIsLoginLoading(true);
-          if (await AppwriteService.signOut()) {
-            setAccount(null);
-          }
-          setIsLoginLoading(false);
+          queryClient.invalidateQueries(["account"]);
         }}
         auto
         type="default"
