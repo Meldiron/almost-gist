@@ -54,6 +54,9 @@ TODO:
 
 > If deploying to static hosting, use `npm run generate` instead, and deploy files from `out` folder.
 
+3. Deploy frontend and backend on the same domain. For example, `myapp.com` and `appwrite.myapp.com`
+4. Add frontend hostname as a platform in Appwrite project
+
 ## 🤝 Contributing
 
 To contribute to frontend, make sure to use the [Geist UI](https://geist-ui.dev/) design system. Also, make sure to use [TanStack Query](https://tanstack.com/query/v4/) for state management.

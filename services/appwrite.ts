@@ -61,7 +61,8 @@ export const AppwriteService = {
         try {
             return await database.listDocuments<Comment>("prod", "comments", [
                 Query.equal("gistId", gistId),
-                Query.orderDesc("$createdAt")
+                Query.orderDesc("$createdAt"),
+                Query.limit(100)
             ]);
         } catch (err) {
             console.log(err);
@@ -73,7 +74,8 @@ export const AppwriteService = {
             return await database.listDocuments<Reaction>("prod", "reactions", [
                 Query.equal("resourceType", resourceType),
                 Query.equal("resourceId", resourceId),
-                Query.equal("userId", userId)
+                Query.equal("userId", userId),
+                Query.limit(6) // max amount of emojis
             ]);
         } catch (err) {
             return null;

@@ -58,7 +58,7 @@ export const GistComments: FC<{
       <Grid xs={24}>
         <div style={{ width: "100%", padding: "1rem 0" }}>
           <Divider>
-            {comments.data.total >= 5000 ? "5000+" : comments.data.total}{" "}
+            {comments.data.total >= 100 ? "100+" : comments.data.total}{" "}
             {comments.data.total === 1 ? "Comment" : "Comments"}
           </Divider>
         </div>
