@@ -6,6 +6,7 @@ TODO:
 - Button for `Create Gist` + Page
 - Rute guard logic
 - Remove all `any`
+- Per-button reaction loading
 - All `TODO: `
 - Comments pagination and "Load more" or something
 
@@ -21,12 +22,6 @@ TODO:
 - [Next.js](https://nextjs.org/)
 - [Geist UI](https://geist-ui.dev/)
 
-## 👀 Setup Client
-
-1. Install libarries `npm install`
-2. Update `endpoint` in `services/appwrite.ts`
-3. Start server `npm serve`
-
 ## ⚙️ Setup Server
 
 1. Setup Appwrite server
@@ -39,20 +34,29 @@ TODO:
 8. Deploy project settings with `appwrite deploy settings`
 9. Deploy teams with `appwrite deploy teams`
 10. Deploy functions with `appwrite deploy functions`
+11. Set variables on deployed functions. There is `backend/functions` folder for each function. They all have `README.md` describing what variables they need
+
+## 👀 Setup Client
+
+1. Install libarries `npm install`
+2. Update `endpoint` in `services/appwrite.ts` (Appwrite endpoint from server setup)
+3. Start server `npm serve`
 
 ## 🚨 Setup Moderation
 
 1. Tell your moderator to create an account (sign in with GitHub)
-2. Add user to Moderators team. They will be able to edit and delete all gists
+2. Add user to `Moderators` team. They will be able to edit and delete all gists, comments and reactions
 
 ## 🚀 Deploy client
 
 1. Build with `npm build`
-2. Deploy from `.next`, or set up a static build
+2. Deploy from `.next`
+
+> If deploying to static hosting, use `npm run generate` instead, and deploy files from `out` folder.
 
 ## 🤝 Contributing
 
-To contribute to UI, make sure to use the [Geist UI](https://geist-ui.dev/) design system.
+To contribute to frontend, make sure to use the [Geist UI](https://geist-ui.dev/) design system. Also, make sure to use [TanStack Query](https://tanstack.com/query/v4/) for state management.
 
 When contributing to backend-related logic, make sure to sync-up `backend/appwrite.json` by running the `appwrite init` commands in the `backend` folder.
 
