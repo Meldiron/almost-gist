@@ -1,14 +1,9 @@
 TODO:
 
 - onDocumentCreate/onDocumentUpdate - set reactions; use total to count and list query for each emoji
-- function for toggleReaction()
-- Light up reactions I made (+ new collection probably)
 - Button for `Create Gist` + Page
 - Rute guard logic
-- Remove all `any`
-- Per-button reaction loading
 - All `TODO: `
-- Comments pagination and "Load more" or something
 
 ![Almost Gist Cover](public/cover.png)
 

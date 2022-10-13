@@ -1,7 +1,8 @@
 import { Grid, Text, Image, Button } from "@geist-ui/core";
-import { Github, Moon, Sun } from "@geist-ui/icons";
+import { Github, Moon, Plus, Sun } from "@geist-ui/icons";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Models } from "appwrite";
+import Link from "next/link";
 import { FC, useContext, useState } from "react";
 import ThemeContext from "../../contexts/theme";
 import { AppwriteService } from "../../services/appwrite";
@@ -68,12 +69,26 @@ export const PageHeader: FC = () => {
       <Grid sm>
         <Grid.Container alignItems="center" gap={1}>
           <Grid>
-            <Image alt="Logo" height="40px" src="/logo.svg" width="40px" />
+            <Link href="/">
+              <Image
+                style={{ cursor: "pointer" }}
+                alt="Logo"
+                height="40px"
+                src="/logo.svg"
+                width="40px"
+              />
+            </Link>
           </Grid>
           <Grid>
-            <Text h4 type="default" style={{ margin: "0" }}>
-              Almost Gist
-            </Text>
+            <Link href="/">
+              <Text
+                style={{ cursor: "pointer", margin: "0" }}
+                h4
+                type="default"
+              >
+                Almost Gist
+              </Text>
+            </Link>
           </Grid>
         </Grid.Container>
       </Grid>
@@ -81,6 +96,18 @@ export const PageHeader: FC = () => {
         <Grid.Container alignItems="center" gap={1}>
           <Grid>{authButton}</Grid>
           <Grid>{themeButton}</Grid>
+          {account.data !== null && (
+            <Grid>
+              <Link href="/new-gist">
+                <Button
+                  iconRight={<Plus />}
+                  auto
+                  type="success-light"
+                  px={0.6}
+                />
+              </Link>
+            </Grid>
+          )}
         </Grid.Container>
       </Grid>
     </Grid.Container>
