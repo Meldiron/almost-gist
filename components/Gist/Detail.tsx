@@ -25,7 +25,7 @@ export const GistDetail: FC<{
   const queryClient = useQueryClient();
 
   const gist = useQuery(
-    ["gist"],
+    ["gist", gistId],
     async () => await AppwriteService.getGist(gistId)
   );
 

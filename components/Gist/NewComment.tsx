@@ -8,6 +8,7 @@ import {
   Tabs,
   Text,
   Textarea,
+  useToasts,
 } from "@geist-ui/core";
 import parse from "html-react-parser";
 
@@ -21,6 +22,8 @@ import { GistReactions } from "./Reactions";
 export const GistNewComment: FC<{
   gistId: string;
 }> = ({ gistId }) => {
+  const { setToast } = useToasts();
+
   const account = useQuery<Models.Account<any> | null>(
     ["account"],
     async () => await AppwriteService.getAccount()
@@ -38,11 +41,22 @@ export const GistNewComment: FC<{
 
     async function onSubmit() {
       setIsSubmitting(true);
-      const res = await AppwriteService.createComment(gistId, commentValue);
-      setIsSubmitting(false);
+      try {
+        const res = await AppwriteService.createComment(gistId, commentValue);
 
-      if (res) {
+        setToast({
+          text: "Comment was successfully created.",
+          type: "success",
+        });
+
         setCommentValue("");
+      } catch (err: any) {
+        setToast({
+          text: err.message,
+          type: "error",
+        });
+      } finally {
+        setIsSubmitting(false);
       }
     }
 

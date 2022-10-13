@@ -16,7 +16,7 @@ export const GistComments: FC<{
   gistId: string;
 }> = ({ gistId }) => {
   const comments = useQuery(
-    ["comments"],
+    ["comments", gistId],
     async () => await AppwriteService.getComments(gistId)
   );
 

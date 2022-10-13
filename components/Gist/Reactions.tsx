@@ -75,6 +75,7 @@ export const GistReactions: FC<{
 
         return (
           <GistReaction
+            key={icon}
             resourceId={resourceId}
             resourceType={resourceType}
             reactionsCount={reactions[i] ?? 0}

@@ -1,4 +1,4 @@
-import { Button, Grid, Loading, Note } from "@geist-ui/core";
+import { Button, Grid, Loading, Note, useToasts } from "@geist-ui/core";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Models } from "appwrite";
 import { FC, useEffect, useState } from "react";
@@ -24,6 +24,8 @@ export const GistReaction: FC<{
   icon,
   isReacted,
 }) => {
+  const { setToast } = useToasts();
+
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -47,12 +49,25 @@ export const GistReaction: FC<{
   function onReactionClick() {
     async function toggleReaction() {
       setIsSubmitting(true);
-      await AppwriteService.toggleReaction(
-        resourceType,
-        resourceId,
-        reactionIndex
-      );
-      setIsSubmitting(false);
+      try {
+        await AppwriteService.toggleReaction(
+          resourceType,
+          resourceId,
+          reactionIndex
+        );
+
+        setToast({
+          text: "Reaction was successfully toggled.",
+          type: "success",
+        });
+      } catch (err: any) {
+        setToast({
+          text: err.message,
+          type: "error",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     }
 
     toggleReaction();

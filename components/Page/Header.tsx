@@ -1,4 +1,4 @@
-import { Grid, Text, Image, Button } from "@geist-ui/core";
+import { Grid, Text, Image, Button, useToasts } from "@geist-ui/core";
 import { Github, Moon, Plus, Sun } from "@geist-ui/icons";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Models } from "appwrite";
@@ -8,14 +8,38 @@ import ThemeContext from "../../contexts/theme";
 import { AppwriteService } from "../../services/appwrite";
 
 export const PageHeader: FC = () => {
+  const { setToast } = useToasts();
+
   const account = useQuery<Models.Account<any> | null>(
     ["account"],
     async () => await AppwriteService.getAccount()
   );
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [theme, setTheme] = useContext(ThemeContext);
 
   const queryClient = useQueryClient();
+
+  async function onSignOut() {
+    setIsSubmitting(true);
+    try {
+      await AppwriteService.signOut();
+
+      setToast({
+        text: "Successfully signed out.",
+        type: "success",
+      });
+
+      queryClient.invalidateQueries(["account"]);
+    } catch (err: any) {
+      setToast({
+        text: err.message,
+        type: "error",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   const themeButton = theme ? (
     <Button
@@ -52,11 +76,8 @@ export const PageHeader: FC = () => {
       </Button>
     ) : (
       <Button
-        loading={account.isLoading}
-        onClick={async () => {
-          await AppwriteService.signOut();
-          queryClient.invalidateQueries(["account"]);
-        }}
+        loading={isSubmitting}
+        onClick={() => onSignOut()}
         auto
         type="default"
       >

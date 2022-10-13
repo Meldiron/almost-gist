@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Models, Query, ID, Functions } from 'appwrite';
+import { Client, Account, Databases, Models, Query, ID, Functions, AppwriteException } from 'appwrite';
 
 export type Gist = {
     name: string;
@@ -41,14 +41,6 @@ export const AppwriteService = {
             return null;
         }
     },
-    signOut: async () => {
-        try {
-            return await account.deleteSession('current');
-        } catch (err) {
-            console.log(err);
-            return null;
-        }
-    },
     getGist: async (gistId: string) => {
         try {
             return await database.getDocument<Gist>("prod", "gists", gistId);
@@ -69,6 +61,18 @@ export const AppwriteService = {
             return null;
         }
     },
+    getMyGists: async (userId: string) => {
+        try {
+            return await database.listDocuments<Gist>("prod", "gists", [
+                Query.equal("createdBy", userId),
+                Query.orderDesc("$createdAt"),
+                Query.limit(100)
+            ]);
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
+    },
     getMyReactions: async (resourceType: 'gists' | 'comments', resourceId: string, userId: string) => {
         try {
             return await database.listDocuments<Reaction>("prod", "reactions", [
@@ -80,6 +84,10 @@ export const AppwriteService = {
         } catch (err) {
             return null;
         }
+    },
+
+    signOut: async () => {
+        return await account.deleteSession('current');
     },
     createComment: async (gistId: string, content: string) => {
         try {
@@ -93,38 +101,28 @@ export const AppwriteService = {
         }
     },
     createGist: async (name: string, content: string) => {
-        try {
-            return await database.createDocument<Gist>("prod", "gists", ID.unique(), {
-                name, content
-            });
-        } catch (err) {
-            console.log(err);
-            return null;
-        }
+        return await database.createDocument<Gist>("prod", "gists", ID.unique(), {
+            name, content
+        });
     },
     toggleReaction: async (resourceType: 'gists' | 'comments', resourceId: string, reactionIndex: number) => {
-        try {
-            const execution = await functions.createExecution("toggleReaction", JSON.stringify({
-                resourceType,
-                resourceId,
-                reactionIndex
-            }));
+        const execution = await functions.createExecution("toggleReaction", JSON.stringify({
+            resourceType,
+            resourceId,
+            reactionIndex
+        }));
 
-            if (execution.response) {
-                const response = JSON.parse(execution.response);
+        if (execution.response) {
+            const response = JSON.parse(execution.response);
 
-                if (!response.success) {
-                    throw new Error(response.message);
-                }
-
-                return response;
-            } else {
-                console.log(execution);
-                throw new Error("Could not execute function.");
+            if (!response.success) {
+                throw new AppwriteException(response.message);
             }
-        } catch (err) {
-            console.log(err);
-            return null;
+
+            return response;
+        } else {
+            console.log(execution);
+            throw new AppwriteException("Could not execute function.");
         }
     }
 }
