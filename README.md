@@ -53,7 +53,11 @@ When contributing to backend-related logic, make sure to sync-up `backend/appwri
 
 ## 🖼️ Screenshots
 
-TODO: Add
+![Screenshot](public/screenshots/ss1.png)
+![Screenshot](public/screenshots/ss2.png)
+![Screenshot](public/screenshots/ss3.png)
+![Screenshot](public/screenshots/ss4.png)
+![Screenshot](public/screenshots/ss5.png)
 
 ## 🤖 Auto-generated documentation
 

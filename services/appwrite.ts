@@ -4,6 +4,7 @@ export type Gist = {
     name: string;
     content: string;
     reactions?: number[];
+    createdBy?: string;
 } & Models.Document;
 
 export type Comment = {
@@ -100,9 +101,9 @@ export const AppwriteService = {
             return null;
         }
     },
-    createGist: async (name: string, content: string) => {
+    createGist: async (name: string, content: string, userId: string) => {
         return await database.createDocument<Gist>("prod", "gists", ID.unique(), {
-            name, content
+            name, content, createdBy: userId
         });
     },
     toggleReaction: async (resourceType: 'gists' | 'comments', resourceId: string, reactionIndex: number) => {

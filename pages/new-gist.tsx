@@ -41,7 +41,11 @@ const Home: NextPage = () => {
     async function onSubmit() {
       setIsSubmitting(true);
       try {
-        const res = await AppwriteService.createGist(title, content);
+        const res = await AppwriteService.createGist(
+          title,
+          content,
+          account.data?.$id ?? "unknown"
+        );
 
         setToast({
           text: "Gist was successfully created.",
