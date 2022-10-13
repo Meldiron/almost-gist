@@ -7,6 +7,7 @@ import {
   AppwriteService,
   Reaction,
 } from "../../services/appwrite";
+import { GistReaction } from "./Reaction";
 
 export const GistReactions: FC<{
   resourceType: "gists" | "comments";
@@ -51,22 +52,6 @@ export const GistReactions: FC<{
     );
   }, []);
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  function onReactionClick(reactionIndex: number) {
-    async function toggleReaction() {
-      setIsSubmitting(true);
-      await AppwriteService.toggleReaction(
-        resourceType,
-        resourceId,
-        reactionIndex
-      );
-      setIsSubmitting(false);
-    }
-
-    toggleReaction();
-  }
-
   if (myReactions.isLoading) {
     return <Loading>Loading reactions</Loading>;
   }
@@ -89,19 +74,14 @@ export const GistReactions: FC<{
         );
 
         return (
-          <Grid key={i}>
-            <Button
-              type={doc ? "secondary" : "default"}
-              ghost={doc ? true : false}
-              onClick={(e) => onReactionClick(i)}
-              onMouseDown={(e) => e.preventDefault()}
-              loading={isSubmitting}
-              icon={<p>{icon}</p>}
-              auto
-            >
-              {reactions[i] ?? 0}
-            </Button>
-          </Grid>
+          <GistReaction
+            resourceId={resourceId}
+            resourceType={resourceType}
+            reactionsCount={reactions[i] ?? 0}
+            reactionIndex={i}
+            icon={icon}
+            isReacted={doc ? true : false}
+          ></GistReaction>
         );
       })}
     </Grid.Container>
