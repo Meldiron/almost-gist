@@ -4,23 +4,40 @@ Welcome to the documentation of this function 👋 We strongly recommend keeping
 
 ## 🤖 Documentation
 
-Simple function similar to typical "hello world" example, but instead, we return a simple JSON that tells everyone how awesome developers are.
+Function toggles user's reaction on gist or comment. This function is meant to be executed by a client directly.
 
-<!-- Update with your description, for example 'Create Stripe payment and return payment URL' -->
-
-_Example input:_
-
-This function expects no input
-
-<!-- If input is expected, add example -->
-
-_Example output:_
-
-<!-- Update with your expected output -->
+_Example inputs:_
 
 ```json
 {
- "areDevelopersAwesome": true
+ "resourceType": "gists",
+ "resourceId": "634465a342d3221a2a91",
+ "reactionIndex" 0
+}
+```
+
+```json
+{
+ "resourceType": "comments",
+ "resourceId": "634714af7d73e60b6efb",
+ "reactionIndex" 1
+}
+```
+
+_Example success output:_
+
+```json
+{
+  "success": true
+}
+```
+
+_Example failure output:_
+
+```json
+{
+  "success": false,
+  "message": "Reaction not supported."
 }
 ```
 
@@ -30,7 +47,7 @@ List of environment variables used by this cloud function:
 
 - **APPWRITE_FUNCTION_ENDPOINT** - Endpoint of Appwrite project
 - **APPWRITE_FUNCTION_API_KEY** - Appwrite API Key
-<!-- Add your custom environment variables -->
+- **MAX_ALLOWED_REACTION** - Set to 5. Maximum allowed index. Increase this if allowing new emoji reactions.
 
 ## 🚀 Deployment
 
