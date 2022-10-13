@@ -92,6 +92,16 @@ export const AppwriteService = {
             return null;
         }
     },
+    createGist: async (name: string, content: string) => {
+        try {
+            return await database.createDocument<Gist>("prod", "gists", ID.unique(), {
+                name, content
+            });
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
+    },
     toggleReaction: async (resourceType: 'gists' | 'comments', resourceId: string, reactionIndex: number) => {
         try {
             const execution = await functions.createExecution("toggleReaction", JSON.stringify({

@@ -4,7 +4,7 @@ import { FC } from "react";
 
 export const PageFooter: FC = () => {
   return (
-    <Grid.Container justify="center" gap={2}>
+    <Grid.Container justify="center" gap={2} style={{ marginTop: "1rem" }}>
       <Grid xs={24}>
         <Grid.Container justify="center">
           <Grid style={{ textAlign: "center" }}>

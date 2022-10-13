@@ -3,6 +3,7 @@ TODO:
 - onDocumentCreate/onDocumentUpdate - set reactions; use total to count and list query for each emoji
 - Button for `Create Gist` + Page
 - Rute guard logic
+- Nicer error alerts (console.log)
 - All `TODO: `
 
 ![Almost Gist Cover](public/cover.png)
