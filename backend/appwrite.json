@@ -22,8 +22,8 @@
     "teams": [
         {
             "$id": "mods",
-            "$createdAt": 1665343187,
-            "$updatedAt": 1665343187,
+            "$createdAt": "2022-10-09T19:19:47.277+00:00",
+            "$updatedAt": "2022-10-10T13:37:42.751+00:00",
             "name": "Moderators",
             "total": 0
         }
@@ -261,6 +261,19 @@
                         "ASC",
                         "ASC"
                     ]
+                },
+                {
+                    "key": "deleteReactions",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "resourceId",
+                        "resourceType"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC"
+                    ]
                 }
             ]
         }
@@ -282,6 +295,25 @@
             "events": [],
             "schedule": "",
             "timeout": 15
+        },
+        {
+            "$id": "onGistChange",
+            "name": "onGistChange",
+            "runtime": "node-16.0",
+            "path": "functions/onGistChange",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [
+                "databases.prod.collections.gists.documents.*.create",
+                "databases.prod.collections.gists.documents.*.update",
+                "databases.prod.collections.gists.documents.*.delete"
+            ],
+            "schedule": "",
+            "timeout": 60
         }
     ]
 }

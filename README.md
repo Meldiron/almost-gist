@@ -98,6 +98,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## 🏗️ TODOs
 
-- onDocumentCreate/onDocumentUpdate - set reactions; use total to count and list query for each emoji; also set createdBy
-- delete (gist, comment)
-- moderation
+- update & delete (gist, comment)
+- moderation (if mod, update&delete button on others stuff)

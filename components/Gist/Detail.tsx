@@ -29,9 +29,10 @@ export const GistDetail: FC<{
     async () => await AppwriteService.getGist(gistId)
   );
 
-  // TODO: Unsub if needed?
+  let unsub = () => {};
   useEffect(() => {
-    AppwriteClient.subscribe<Gist>(
+    unsub();
+    unsub = AppwriteClient.subscribe<Gist>(
       "databases.prod.collections.gists.documents." + gist.data?.$id ??
         "unknown",
       (payload) => {
