@@ -20,7 +20,7 @@ _Example inputs:_
 {
  "resourceType": "comments",
  "resourceId": "634714af7d73e60b6efb",
- "reactionIndex" 1
+ "reactionIndex": 1
 }
 ```
 

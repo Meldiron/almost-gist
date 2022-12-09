@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             content="Platform to share your markdowns with anyone."
           />
 
-          <meta property="og:url" content="https://almost-gist.matejbaco.eu/" />
+          <meta property="og:url" content="https://gist.almostapps.eu/" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="Almost Gist" />
           <meta
@@ -28,14 +28,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
           <meta
             property="og:image"
-            content="https://almost-gist.matejbaco.eu/cover.png"
+            content="https://gist.almostapps.eu/cover.png"
           />
 
           <meta name="twitter:card" content="summary_large_image" />
-          <meta property="twitter:domain" content="almost-gist.matejbaco.eu" />
+          <meta property="twitter:domain" content="gist.almostapps.eu" />
           <meta
             property="twitter:url"
-            content="https://almost-gist.matejbaco.eu/"
+            content="https://gist.almostapps.eu/"
           />
           <meta name="twitter:title" content="Almost Gist" />
           <meta
@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
           <meta
             name="twitter:image"
-            content="https://almost-gist.matejbaco.eu/cover.png"
+            content="https://gist.almostapps.eu/cover.png"
           />
         </Head>
         <Page

@@ -20,7 +20,7 @@ export type Reaction = {
     resourceType: 'comments' | 'gists';
 } & Models.Document;
 
-const endpoint = 'https://appwrite.almost-gist.matejbaco.eu/v1';
+const endpoint = 'https://backend.gist.almostapps.eu/v1';
 
 export const AppwriteClient = new Client()
     .setEndpoint(endpoint)

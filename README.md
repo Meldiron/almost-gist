@@ -19,16 +19,15 @@
 5. Enter `cd backend`
 6. Deploy database structure with `appwrite deploy collection`
 7. Deploy database seeds with `sh seed.sh`
-8. Deploy project settings with `appwrite deploy settings`
-9. Deploy teams with `appwrite deploy teams`
-10. Deploy functions with `appwrite deploy functions`
-11. Set variables on deployed functions. There is `backend/functions` folder for each function. They all have `README.md` describing what variables they need
+8. Deploy functions with `appwrite deploy function`
+9. Set variables on deployed functions. There is `backend/functions` folder for each function. They all have `README.md` describing what variables they need
+10. Setup `GitHub` OAuth provider
 
 ## 👀 Setup Client
 
 1. Install libarries `npm install`
 2. Update `endpoint` in `services/appwrite.ts` (Appwrite endpoint from server setup)
-3. Start server `npm serve`
+3. Start server `npm run dev`
 
 ## 🚨 Setup Moderation
 

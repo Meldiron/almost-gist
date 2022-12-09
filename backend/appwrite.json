@@ -1,41 +1,6 @@
 {
     "projectId": "almostGist",
     "projectName": "Almost Gist",
-    "settings": {
-        "authLimit": 0,
-        "authEmailPassword": false,
-        "authUsersAuthMagicURL": false,
-        "authAnonymous": false,
-        "authInvites": false,
-        "authJWT": false,
-        "authPhone": false,
-        "serviceStatusForAccount": true,
-        "serviceStatusForAvatars": true,
-        "serviceStatusForDatabases": true,
-        "serviceStatusForLocale": true,
-        "serviceStatusForHealth": true,
-        "serviceStatusForStorage": true,
-        "serviceStatusForTeams": true,
-        "serviceStatusForUsers": true,
-        "serviceStatusForFunctions": true
-    },
-    "teams": [
-        {
-            "$id": "mods",
-            "$createdAt": "2022-10-09T19:19:47.277+00:00",
-            "$updatedAt": "2022-10-10T13:37:42.751+00:00",
-            "name": "Moderators",
-            "total": 0
-        }
-    ],
-    "databases": [
-        {
-            "$id": "prod",
-            "name": "Production",
-            "$createdAt": "2022-10-09T19:17:09.295+00:00",
-            "$updatedAt": "2022-10-10T13:37:42.492+00:00"
-        }
-    ],
     "collections": [
         {
             "$id": "gists",
