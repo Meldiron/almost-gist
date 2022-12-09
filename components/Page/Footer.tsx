@@ -11,12 +11,11 @@ export const PageFooter: FC = () => {
             Made with 💙 and{" "}
             <Link href="https://appwrite.io/" block>
               Appwrite
-            </Link>{" "}
-            by{" "}
-            <Link href="https://github.com/meldiron" block>
-              Matej &quot;Meldiron&quot; Bačo
+            </Link>.{" "}
+            Contact:{" "}
+            <Link href="mailto://contact@almostapps.eu" block>
+              contact@almostapps.eu
             </Link>
-            .
           </Grid>
         </Grid.Container>
       </Grid>
