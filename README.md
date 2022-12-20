@@ -12,7 +12,7 @@
 - [Next.js](https://nextjs.org/)
 - [Geist UI](https://geist-ui.dev/)
 
-## ⚙️ Setup Server
+## 🛠️ Setup Server
 
 1. Setup Appwrite server
 2. Create project `almostGist`
@@ -38,13 +38,8 @@
 
 ## 🚀 Deploy client
 
-1. Build with `npm build`
-2. Deploy from `.next`
-
-> If deploying to static hosting, use `npm run generate` instead, and deploy files from `out` folder.
-
-3. Deploy frontend and backend on the same domain. For example, `myapp.com` and `appwrite.myapp.com`
-4. Add frontend hostname as a platform in Appwrite project
+1. Deploy frontend and backend on the same domain. For example, `myapp.com` and `appwrite.myapp.com`
+2. Add frontend hostname as a platform in Appwrite project
 
 ## 🤝 Contributing
 
