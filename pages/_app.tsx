@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <title>Almost Gist</title>
           <meta
             name="description"
-            content="Platform to share your markdowns with anyone."
+            content="Share your markdowns files with anyone."
           />
 
           <meta property="og:url" content="https://gist.almostapps.eu/" />
@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta property="og:title" content="Almost Gist" />
           <meta
             property="og:description"
-            content="Platform to share your markdowns with anyone."
+            content="Share your markdowns files with anyone."
           />
           <meta
             property="og:image"
@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="twitter:title" content="Almost Gist" />
           <meta
             name="twitter:description"
-            content="Platform to share your markdowns with anyone."
+            content="Share your markdowns files with anyone."
           />
           <meta
             name="twitter:image"

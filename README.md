@@ -1,8 +1,10 @@
-![Almost Gist Cover](public/cover.png)
+![Almost Cover](public/cover.png)
 
 # 🗃️ Almost Gist
 
-> Platform to share your markdowns with anyone.
+> Share your markdowns files with anyone.
+
+![Almost Icon](public/logo.png)
 
 ## 🧰 Tech Stack
 

@@ -95,7 +95,7 @@ export const PageHeader: FC = () => {
                 style={{ cursor: "pointer" }}
                 alt="Logo"
                 height="40px"
-                src="/logo.svg"
+                src="/logo.png"
                 width="40px"
               />
             </Link>
