@@ -20,11 +20,11 @@ export type Reaction = {
     resourceType: 'comments' | 'gists';
 } & Models.Document;
 
-const endpoint = 'https://backend.gist.almostapps.eu/v1';
+const endpoint = 'https://appwrite.stage.gist.almostapps.eu/v1';
 
 export const AppwriteClient = new Client()
     .setEndpoint(endpoint)
-    .setProject('almostGist');
+    .setProject('64fae54c920789c13cd8');
 
 const account = new Account(AppwriteClient);
 const database = new Databases(AppwriteClient);
